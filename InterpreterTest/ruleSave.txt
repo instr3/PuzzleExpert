@@ -1,0 +1,33 @@
+﻿[RULE 1]
+FOR ANY Number n
+IF n>=100 OR n<=0
+THEN
+	IsGoodNumber(n) IS FALSE
+	
+[RULE 2]
+FOR ANY Number n
+IF n IS 1
+THEN
+	IsGoodNumber(n) IS TRUE
+
+[RULE 3]
+FOR ANY Number n
+IF IsGoodNumber(n) IS TRUE
+THEN
+	IsGoodNumber(n+2) IS TRUE
+
+
+[RULE 4]
+FOR ANY Number n
+IF n>=50 AND IsGoodNumber(n) OR ((((n)<=(50)))) AND NOT IsGoodNumber n
+THEN
+	IsBestNumber(n) IS TRUE
+
+
+[RULE 5]
+FOR ANY Number a
+	ANY NearingNumber b,d
+	ANY Number c
+IF TriFunction(a,b,c) > 0 AND TriFunction2(a,TriFunction3(a,b,TriFunction4(c,b,a)),c) != 0
+THEN
+	IsBestNumber(Subtract(Add(a,1),1)) IS IsGoodNumber Subtract Add(a*2,1),2

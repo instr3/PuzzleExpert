@@ -1,0 +1,254 @@
+﻿[RULE 101:Basic Rule For 0]
+FOR NumberCell c
+IF
+	NumberOf c IS 0
+THEN
+	ColorOf AllEdgesOf c ARE ALL WHITE
+
+[RULE 102:Basic Rule For Single Number #1]
+FOR NumberCell c
+IF
+	NumberOf c > 0 AND
+	CountOf BlackSubsetOf AllEdgesOf c IS NumberOf c
+THEN
+	ColorOf UncoloredSubsetOf AllEdgesOf c ARE ALL WHITE
+
+[RULE 103:Basic Rule For Single Number #2]
+FOR NumberCell c
+IF
+	NumberOf c > 0 AND
+	CountOf WhiteSubsetOf AllEdgesOf c IS 4 - NumberOf c
+THEN
+	ColorOf UncoloredSubsetOf AllEdgesOf c ARE ALL BLACK
+
+[RULE 201:Basic Neighbor 3]
+FOR NeighborNumberPair a,b
+IF
+	NumberOf a IS 3 AND
+	NumberOf b IS 3
+THEN
+	ColorOf CommonEdgeOf(a,b) IS BLACK ALSO
+	ColorOf OppositeEdgesOf CommonEdgeOf(a,b) ARE ALL BLACK ALSO
+	ColorOf ExtendedEdgesOf CommonEdgeOf(a,b) ARE ALL WHITE
+
+[RULE 202:Basic Diagonal 3]
+FOR DiagonalNumberPair a,b
+IF
+	NumberOf a IS 3 AND
+	NumberOf b IS 3
+THEN
+	ColorOf MostAwayFrom(AllEdgesOf(a),b) ARE ALL BLACK ALSO
+	ColorOf MostAwayFrom(AllEdgesOf(b),a) ARE ALL BLACK
+	
+[RULE 203:Basic 0 and 3]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 3 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c ARE ALL WHITE
+THEN
+	ColorOf NearingEdgesOf c ARE ALL BLACK
+
+[RULE 2035:(Extended) Approach 3]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 3 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c IS ANY BLACK
+THEN
+	ColorOf MostAwayFrom(AllEdgesOf CellOf c,CellOf OppositeCornerOf c) ARE ALL BLACK ALSO
+	ColorOf UncoloredSubsetOf NearingEdgesOf OppositeCornerOf c ARE ALL WHITE
+
+[RULE 204:Basic 0 and 1]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 1 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c ARE ALL WHITE
+THEN
+	ColorOf NearingEdgesOf c ARE ALL WHITE
+
+[RULE 2045:(Extended) Approach 1]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 1 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c IS ANY BLACK AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c IS ANY WHITE
+THEN
+	ColorOf MostAwayFrom(AllEdgesOf CellOf c,CellOf OppositeCornerOf c) ARE ALL WHITE
+
+[RULE 205:(Extended) 2 Junctions]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 2 AND
+	ColorsOf NearingEdgesOf DiagonalCornerOf c IS ANY WHITE AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c IS ANY BLACK
+THEN
+	ColorOf UncoloredSubsetOf NearingEdgesOf DiagonalCornerOf c ARE ALL BLACK ALSO
+	ColorOf UncoloredSubsetOf NearingEdgesOf OppositeCornerOf c ARE ALL WHITE
+	
+	
+[RULE 206:(Extended) Neighbor 1]
+FOR NeighborNumberPair a,b
+IF
+	NumberOf a IS 1 AND
+	NumberOf b IS 1 AND
+	ColorsOf ExtendedEdgesOf CommonEdgeOf(a,b) IS ANY WHITE
+THEN
+	ColorOf CommonEdgeOf(a,b) IS WHITE
+
+[RULE 301:Corner 1]
+FOR OppositeCornerPair a,b
+IF
+	CountOf BlackSubsetOf NearingEdgesOf a + CountOf BlackSubsetOf NearingEdgesOf b IS 2
+THEN
+	ColorOf UncoloredSubsetOf NearingEdgesOf a ARE ALL WHITE ALSO
+	ColorOf UncoloredSubsetOf NearingEdgesOf b ARE ALL WHITE
+
+[RULE 302:Corner 2]
+FOR OppositeCornerPair a,b
+IF
+	CountOf BlackSubsetOf NearingEdgesOf a + CountOf BlackSubsetOf NearingEdgesOf b IS 1 AND
+	CountOf WhiteSubsetOf NearingEdgesOf a + CountOf WhiteSubsetOf NearingEdgesOf b IS 2
+THEN
+	ColorOf UncoloredSubsetOf NearingEdgesOf a ARE ALL BLACK ALSO
+	ColorOf UncoloredSubsetOf NearingEdgesOf b ARE ALL BLACK
+
+[RULE 303:Corner 3]
+FOR OppositeCornerPair a,b
+IF
+	CountOf WhiteSubsetOf NearingEdgesOf a + CountOf WhiteSubsetOf NearingEdgesOf b IS 3
+THEN
+	ColorOf UncoloredSubsetOf NearingEdgesOf a ARE ALL WHITE ALSO
+	ColorOf UncoloredSubsetOf NearingEdgesOf b ARE ALL WHITE
+
+[RULE 401:Advanced 0 and 2 #1]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 2 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c ARE ALL WHITE AND
+	ColorsOf NearingEdgesOf DiagonalCornerOf c IS ANY BLACK
+THEN
+	ColorOf NearingEdgesOf DiagonalCornerOf c ARE ALL BLACK
+	
+[RULE 402:Advanced 0 and 2 #2]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 2 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c ARE ALL WHITE AND
+	ColorsOf NearingEdgesOf DiagonalCornerOf c IS ANY WHITE
+THEN
+	ColorOf NearingEdgesOf DiagonalCornerOf c ARE ALL WHITE
+	
+[RULE 403:Advanced 0 and 2 #3]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 2 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c ARE ALL WHITE AND
+	ColorsOf NearingEdgesOf OppositeCornerOf DiagonalCornerOf c IS ANY BLACK
+THEN
+	ColorOf NearingEdgesOf OppositeCornerOf DiagonalCornerOf c ARE ALL BLACK
+	
+[RULE 404:Advanced 0 and 2 #4]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 2 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c ARE ALL WHITE AND
+	ColorsOf NearingEdgesOf OppositeCornerOf DiagonalCornerOf c IS ANY WHITE
+THEN
+	ColorOf NearingEdgesOf OppositeCornerOf DiagonalCornerOf c ARE ALL WHITE
+
+[RULE 405:Advanced 2 Parallel #1]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 2 AND
+	(ColorsOf NearingEdgesOf OppositeCornerOf FirstOf NearingCornerOf c ARE ALL WHITE OR
+	ColorsOf NearingEdgesOf OppositeCornerOf LastOf NearingCornerOf c ARE ALL WHITE) AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c IS ANY WHITE
+THEN
+	ColorOf UncoloredSubsetOf NearingEdgesOf OppositeCornerOf c ARE ALL BLACK
+	
+
+[RULE 406:Advanced 2 Parallel #2]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 2 AND
+	(ColorsOf NearingEdgesOf OppositeCornerOf FirstOf NearingCornerOf c ARE ALL WHITE OR
+	ColorsOf NearingEdgesOf OppositeCornerOf LastOf NearingCornerOf c ARE ALL WHITE) AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c IS ANY BLACK
+THEN
+	ColorOf UncoloredSubsetOf NearingEdgesOf OppositeCornerOf c ARE ALL WHITE
+
+[RULE 407:Advanced Approach 2 #1]
+FOR NumberCorner c
+IF
+	NumberOf CellOf DiagonalCornerOf c IS 2 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf DiagonalCornerOf c IS ANY BLACK AND
+	ColorsOf NearingEdgesOf OppositeCornerOf DiagonalCornerOf c IS ANY WHITE AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c IS ANY BLACK
+THEN
+	ColorOf UncoloredSubsetOf NearingEdgesOf OppositeCornerOf c ARE ALL WHITE
+
+[RULE 408:Advanced Approach 2 #2]
+FOR NumberCorner c
+IF
+	NumberOf CellOf DiagonalCornerOf c IS 2 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf DiagonalCornerOf c IS ANY BLACK AND
+	ColorsOf NearingEdgesOf OppositeCornerOf DiagonalCornerOf c IS ANY WHITE AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c IS ANY WHITE
+THEN
+	ColorOf UncoloredSubsetOf NearingEdgesOf OppositeCornerOf c ARE ALL BLACK
+	
+[RULE 409:Advanced Approach 2 #3]
+FOR NumberCorner c
+IF
+	NumberOf CellOf c IS 2 AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c IS ANY BLACK AND
+	ColorsOf NearingEdgesOf OppositeCornerOf c IS ANY WHITE AND
+	ColorsOf NearingEdgesOf DiagonalCornerOf c IS ANY BLACK
+THEN
+	ColorOf UncoloredSubsetOf NearingEdgesOf DiagonalCornerOf c ARE ALL WHITE
+	
+[RULE 501:Graph Basic Rope]
+FOR Rope r
+IF
+	CountOf r > 1 AND
+	CountOf CommonSuccessiveEdgesOf(FirstOf r,LastOf r) > 0
+THEN
+	ColorOf UncoloredSubsetOf CommonSuccessiveEdgesOf(FirstOf r,LastOf r) ARE ALL WHITE
+
+[RULE 502:Graph Advanced Rope]
+FOR ANY Rope r
+	ANY OppositeCornerPair a,b
+IF
+	ColorsOf NearingEdgesOf b ARE ALL WHITE AND
+	ColorsOf NearingEdgesOf a ARE ALL UNDECIDED AND
+	((IsEdgeTouch FirstOf NearingEdgesOf a,FirstOf r IS TRUE AND
+	IsEdgeTouch LastOf NearingEdgesOf a,LastOf r IS TRUE) OR
+	(IsEdgeTouch LastOf NearingEdgesOf a,FirstOf r IS TRUE AND
+	IsEdgeTouch FirstOf NearingEdgesOf a,LastOf r IS TRUE))
+THEN
+	ColorOf NearingEdgesOf a ARE ALL WHITE 
+
+[RULE 503:Graph Cut #1]
+FOR GraphCut c
+IF
+	CountOf UncoloredSubsetOf c IS 1 AND
+	(CountOf BlackSubsetOf c) % 2 IS 1
+THEN
+	ColorOf UncoloredSubsetOf c ARE ALL BLACK
+	
+[RULE 504:Graph Cut #2]
+FOR GraphCut c
+IF
+	CountOf UncoloredSubsetOf c IS 1 AND
+	(CountOf BlackSubsetOf c) % 2 IS 0
+THEN
+	ColorOf UncoloredSubsetOf c ARE ALL WHITE
+	
+[RULE 601:Misc CutPoint]
+FOR OppositeCornerPair a,b
+IF
+	ColorsOf NearingEdgesOf a ARE ALL WHITE AND
+	ColorsOf NearingEdgesOf b ARE ALL UNDECIDED AND
+	ColorsOf NearingEdgesOf OppositeCornerOf FirstOf NearingCornerOf b ARE ALL WHITE AND
+	ColorsOf NearingEdgesOf OppositeCornerOf LastOf NearingCornerOf b ARE ALL WHITE
+THEN
+	ColorOf NearingEdgesOf b ARE ALL WHITE

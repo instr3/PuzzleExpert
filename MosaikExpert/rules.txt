@@ -1,0 +1,90 @@
+﻿[RULE 101:Rule For 0]
+FOR NumberCell c
+IF
+	NumberOf c IS 0
+THEN
+	ColorOf SurroundingOf c ARE ALL WHITE
+
+[RULE 102:Rule For 9]
+FOR NumberCell c
+IF
+	NumberOf c IS 9
+THEN
+	ColorOf SurroundingOf c ARE ALL BLACK
+
+[RULE 103:Basic Logic Rule #1]
+FOR NumberCell c
+IF
+	NumberOf c > 0 AND
+	NumberOf c < 9 AND 
+	CountOf BlackSubsetOf SurroundingOf c IS NumberOf c
+THEN
+	ColorOf UncoloredSubsetOf SurroundingOf c ARE ALL WHITE
+
+[RULE 104:Basic Logic Rule #2]
+FOR NumberCell c
+IF
+	NumberOf c > 0 AND
+	NumberOf c < 9 AND 
+	CountOf WhiteSubsetOf SurroundingOf c IS 9 - NumberOf c
+THEN
+	ColorOf UncoloredSubsetOf SurroundingOf c ARE ALL BLACK
+
+[RULE 201:Advanced Rule For Neighbor]
+FOR NeighborNumberPair a,b
+IF
+	(NumberOf a - NumberOf b) IS (3 - CountOf WhiteSubsetOf Except(SurroundingOf a,SurroundingOf b)) - 
+		(CountOf BlackSubsetOf Except(SurroundingOf b,SurroundingOf a))
+THEN
+	ColorOf UncoloredSubsetOf Except(SurroundingOf a,SurroundingOf b) ARE ALL BLACK ALSO
+	ColorOf UncoloredSubsetOf Except(SurroundingOf b,SurroundingOf a) ARE ALL WHITE
+	
+[RULE 202:Advanced Rule For Diagonal]
+FOR DiagonalNumberPair a,b
+IF
+	(NumberOf a - NumberOf b) IS (5 - CountOf WhiteSubsetOf Except(SurroundingOf a,SurroundingOf b)) - 
+		(CountOf BlackSubsetOf Except(SurroundingOf b,SurroundingOf a))
+THEN
+	ColorOf UncoloredSubsetOf Except(SurroundingOf a,SurroundingOf b) ARE ALL BLACK ALSO
+	ColorOf UncoloredSubsetOf Except(SurroundingOf b,SurroundingOf a) ARE ALL WHITE
+	
+[RULE 203:Advanced Rule For Spaced Neighbor]
+FOR SpacedNumberPair a,b,c
+IF
+	(NumberOf a - NumberOf c) IS (6 - CountOf WhiteSubsetOf Except(SurroundingOf a,SurroundingOf c)) - 
+		(CountOf BlackSubsetOf Except(SurroundingOf c,SurroundingOf a))
+THEN
+	ColorOf UncoloredSubsetOf Except(SurroundingOf a,SurroundingOf c) ARE ALL BLACK ALSO
+	ColorOf UncoloredSubsetOf Except(SurroundingOf c,SurroundingOf a) ARE ALL WHITE
+
+	
+[RULE 301:Extended Rule For 3-Line #1]
+FOR SpacedNumberPair a,b,c
+IF
+	NumberOf b >= 0 AND
+	NumberOf a + NumberOf c IS NumberOf b
+THEN
+	ColorOf IntersectionOf(SurroundingOf a,SurroundingOf c) ARE ALL WHITE ALSO
+	ColorOf Except(SurroundingOf a,SurroundingOf b) ARE ALL WHITE ALSO
+	ColorOf Except(SurroundingOf c,SurroundingOf b) ARE ALL WHITE
+
+[RULE 302:Extended Rule For 3-Line #2]
+FOR SpacedNumberPair a,b,c
+IF
+	NumberOf b >= 0 AND
+	(9-NumberOf a) + (9-NumberOf c) IS (9-NumberOf b)
+THEN
+	ColorOf IntersectionOf(SurroundingOf a,SurroundingOf c) ARE ALL BLACK ALSO
+	ColorOf Except(SurroundingOf a,SurroundingOf b) ARE ALL BLACK ALSO
+	ColorOf Except(SurroundingOf c,SurroundingOf b) ARE ALL BLACK
+	
+[RULE 303:Extended Rule For 2x2 Matrix]
+FOR NumberMatrix a,b,c,d
+IF
+	NumberOf a + NumberOf d IS NumberOf b + NumberOf c + 2
+THEN
+	ColorOf Except(SurroundingOf a,UnionOf(SurroundingOf b,SurroundingOf c)) ARE ALL BLACK ALSO
+	ColorOf Except(SurroundingOf d,UnionOf(SurroundingOf b,SurroundingOf c)) ARE ALL BLACK ALSO
+	ColorOf Except(SurroundingOf b,UnionOf(SurroundingOf a,SurroundingOf d)) ARE ALL WHITE ALSO
+	ColorOf Except(SurroundingOf c,UnionOf(SurroundingOf a,SurroundingOf d)) ARE ALL WHITE
+

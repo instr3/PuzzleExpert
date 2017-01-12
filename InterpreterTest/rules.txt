@@ -1,0 +1,16 @@
+[RULE 1]
+FOR ANY Number a
+IF 
+	a*a>0 AND 
+	a*a<=1000
+THEN
+	IsSquareNumber(a*a) IS TRUE
+
+[RULE 2]
+FOR ANY SquareNumber a
+	ANY SquareNumber b
+IF 
+	a+b<=1000 AND
+	IsSquareNumber(a+b)
+THEN
+	IsDiagonalNumber(a+b) IS TRUE
