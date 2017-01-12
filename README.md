@@ -18,12 +18,18 @@ A slitherlink puzzle solver based on manually made expert system framework.
 数回求解器
 
 样例谜题来源于http://www.conceptispuzzles.com/，如有不适之处请告知。
+
 Example puzzles are selected from http://www.conceptispuzzles.com/ . Contact me if inappropriate.
 
 # 规则文本
 ![image](https://github.com/instr3/PuzzleExpert/raw/master/Screenshot/Document-page-001.jpg)
+
 ![image](https://github.com/instr3/PuzzleExpert/raw/master/Screenshot/Document-page-002.jpg)
+
 ![image](https://github.com/instr3/PuzzleExpert/raw/master/Screenshot/Document-page-003.jpg)
+
 ![image](https://github.com/instr3/PuzzleExpert/raw/master/Screenshot/Document-page-004.jpg)
+
 ![image](https://github.com/instr3/PuzzleExpert/raw/master/Screenshot/Document-page-005.jpg)
+
 ![image](https://github.com/instr3/PuzzleExpert/raw/master/Screenshot/Document-page-006.jpg)
