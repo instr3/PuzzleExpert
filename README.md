@@ -19,7 +19,7 @@ A slitherlink puzzle solver based on manually made expert system framework.
 
 并不能保证解决中等或困难的题目，一方面规则还不够完善，另一方面即使规则完善了也很难全部解决（无法引入假设推理）。另外规则分类也有些问题。
 
-样例谜题来源于http://www.conceptispuzzles.com/，如有不适之处请告知。
+样例谜题来源于http://www.conceptispuzzles.com/ ，如有不适之处请告知。
 
 Example puzzles are selected from http://www.conceptispuzzles.com/ . Contact me if inappropriate.
 
